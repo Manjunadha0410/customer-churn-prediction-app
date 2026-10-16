@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        select, input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .error {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffebee;
+            color: #b71c1c;
+            border-radius: 4px;
+            overflow-wrap: anywhere;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Churn Prediction</h1>
+
+    <form action="/predictdata" method="post">
+        <div class="form-group">
+            <label for="CreditScore">Credit Score</label>
+            <input
+                type="number"
+                id="CreditScore"
+                name="CreditScore"
+                placeholder="Enter Credit Score (300-850)"
+                min="300"
+                max="850"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="Geography">Geography</label>
+            <select id="Geography" name="Geography" required>
+                <option value="" selected disabled>Select Geography</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Spain">Spain</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Gender">Gender</label>
+            <select id="Gender" name="Gender" required>
+                <option value="" selected disabled>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Age">Age</label>
+            <input
+                type="number"
+                id="Age"
+                name="Age"
+                placeholder="Enter Age (18-100)"
+                min="18"
+                max="100"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="Tenure">Tenure (years with bank)</label>
+            <input
+                type="number"
+                id="Tenure"
+                name="Tenure"
+                placeholder="Enter Tenure (0-10)"
+                min="0"
+                max="10"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="Balance">Balance</label>
+            <input
+                type="number"
+                id="Balance"
+                name="Balance"
+                placeholder="Enter Account Balance"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+
+        <button type="submit">Predict Customer Status</button>
+    </form>
+
+    {% if results is not none %}
+        <div class="result">
+            <h2>Prediction Result</h2>
+            <p>Multi-Product Customer: <strong>{{ results }}</strong></p>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error">
+            <h2>Prediction Error</h2>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    <a class="back-link" href="/">Back to Home</a>
+</body>
+</html>
