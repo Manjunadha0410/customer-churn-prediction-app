@@ -39,7 +39,7 @@ Required GitHub Secrets
 - AWS_ECR_LOGIN_UR
 
 # Project Structure
-
+```
 ├── src/
 │   ├── components/         
 │   └── pipeline/           
@@ -48,3 +48,4 @@ Required GitHub Secrets
 ├── app.py
 ├── Dockerfile
 └── requirements.txt
+```
